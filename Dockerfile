@@ -11,8 +11,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies.
-# If you add a package-lock.json speed your build by switching to 'npm ci'.
-RUN npm ci
+# Using 'npm install' with --legacy-peer-deps to avoid upstream dependency conflicts during build
+RUN npm install --legacy-peer-deps
 
 # Copy local code to the container image.
 COPY . .
