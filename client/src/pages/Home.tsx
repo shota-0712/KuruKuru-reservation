@@ -85,7 +85,7 @@ function Header() {
     >
       <div className="container">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
-          {/* Logo - Using actual KuruKuru logo */}
+          {/* Logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
               src="/images/lincal-logo.webp"
@@ -104,7 +104,10 @@ function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="glow-btn text-sm lg:text-base px-4 lg:px-6 py-2 rounded-lg font-semibold text-white cursor-pointer relative z-10">
+            <Button
+              className="glow-btn text-sm lg:text-base px-4 lg:px-6 py-2 rounded-lg font-semibold text-white cursor-pointer relative z-10"
+              onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+            >
               無料で相談する
             </Button>
           </div>
@@ -131,7 +134,12 @@ function Header() {
               <a href="#pricing" className="text-foreground py-3 px-2 hover:bg-secondary/50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>料金</a>
               <a href="#testimonials" className="text-foreground py-3 px-2 hover:bg-secondary/50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>導入事例</a>
               <a href="#faq" className="text-foreground py-3 px-2 hover:bg-secondary/50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>よくある質問</a>
-              <Button className="glow-btn w-full mt-3 font-semibold text-white rounded-lg cursor-pointer relative z-10">無料で相談する</Button>
+              <Button
+                className="glow-btn w-full mt-3 font-semibold text-white rounded-lg cursor-pointer relative z-10"
+                onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+              >
+                無料で相談する
+              </Button>
             </nav>
           </motion.div>
         )}
@@ -192,7 +200,10 @@ function HeroSection() {
 
               {/* CTA Buttons - Simplified for mobile side-by-side */}
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-start mb-4 sm:mb-12">
-                <Button className="glow-btn text-sm sm:text-lg px-5 sm:px-8 py-3.5 sm:py-7 rounded-lg sm:rounded-2xl font-bold text-white shadow-md sm:shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-fit">
+                <Button
+                  className="glow-btn text-sm sm:text-lg px-5 sm:px-8 py-3.5 sm:py-7 rounded-lg sm:rounded-2xl font-bold text-white shadow-md sm:shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-fit"
+                  onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+                >
                   無料で相談する
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
                 </Button>
@@ -217,7 +228,7 @@ function HeroSection() {
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
                   <img
                     src="/images/screenshots/IMG_2951.png"
-                    alt="KuruKuru App Interface"
+                    alt="LinCal App Interface"
                     className="w-full h-auto bg-white"
                   />
 
@@ -786,6 +797,7 @@ function PricingSection() {
                       ? 'glow-btn text-white'
                       : 'bg-white border-2 border-primary text-primary hover:bg-primary/5'
                       }`}
+                    onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
                   >
                     このプランで相談
                   </Button>
@@ -813,43 +825,43 @@ function ComparisonSection() {
   const comparisonData = [
     {
       feature: "月額料金",
-      kurukuru: "1,980円～",
+      lincal: "1,980円～",
       otherA: "3,300円～",
       otherB: "5,500円～"
     },
     {
       feature: "チャット機能",
-      kurukuru: "追加0円",
+      lincal: "追加0円",
       otherA: "+1,100円/月",
       otherB: "+2,200円/月"
     },
     {
       feature: "LINE予約",
-      kurukuru: "○",
+      lincal: "○",
       otherA: "○",
       otherB: "○"
     },
     {
       feature: "Googleカレンダー連携",
-      kurukuru: "○",
+      lincal: "○",
       otherA: "○",
       otherB: "×"
     },
     {
       feature: "スマホだけで完結",
-      kurukuru: "○",
+      lincal: "○",
       otherA: "△",
       otherB: "△"
     },
     {
       feature: "初期費用",
-      kurukuru: "0円",
+      lincal: "0円",
       otherA: "0円",
       otherB: "11,000円"
     },
     {
       feature: "契約縛り",
-      kurukuru: "なし",
+      lincal: "なし",
       otherA: "6ヶ月",
       otherB: "12ヶ月"
     }
@@ -874,7 +886,7 @@ function ComparisonSection() {
                 <th className="text-left p-3 sm:p-4 bg-muted/50 rounded-tl-lg text-xs sm:text-sm font-semibold">機能</th>
                 <th className="p-3 sm:p-4 bg-primary/10 text-primary text-xs sm:text-sm font-bold">
                   <div className="flex items-center justify-center gap-1">
-                    <img src="/images/kurukuru-logo.png" alt="KuruKuru" className="h-5 sm:h-6 w-auto" />
+                    <img src="/images/lincal-logo.webp" alt="LinCal" className="h-5 sm:h-6 w-auto" />
                   </div>
                 </th>
                 <th className="p-3 sm:p-4 bg-muted/50 text-xs sm:text-sm font-semibold text-muted-foreground">他社A</th>
@@ -886,7 +898,7 @@ function ComparisonSection() {
                 <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-muted/30"}>
                   <td className="p-3 sm:p-4 text-xs sm:text-sm font-medium border-b border-border/50">{row.feature}</td>
                   <td className="p-3 sm:p-4 text-center text-xs sm:text-sm font-bold text-primary border-b border-border/50 bg-primary/5">
-                    {row.kurukuru}
+                    {row.lincal}
                   </td>
                   <td className="p-3 sm:p-4 text-center text-xs sm:text-sm text-muted-foreground border-b border-border/50">{row.otherA}</td>
                   <td className="p-3 sm:p-4 text-center text-xs sm:text-sm text-muted-foreground border-b border-border/50">{row.otherB}</td>
@@ -944,7 +956,7 @@ function TestimonialsSection() {
             導入店舗様の声
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground px-4">
-            実際にKuruKuruをご利用いただいているオーナー様からの声をご紹介します。
+            実際にLinCalをご利用いただいているオーナー様からの声をご紹介します。
           </p>
         </motion.div>
 
@@ -1068,7 +1080,10 @@ function CTASection() {
             「現在の予約方法からスムーズに移行できるか」<br className="hidden sm:block" />
             店舗様の状況に合わせて、最適な運用方法をご提案いたします。
           </p>
-          <Button className="bg-white text-primary hover:bg-white/95 text-base sm:text-lg px-6 sm:px-10 py-5 sm:py-6 font-semibold shadow-xl hover:shadow-2xl w-full sm:w-auto rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer relative z-10">
+          <Button
+            className="bg-white text-primary hover:bg-white/95 text-base sm:text-lg px-6 sm:px-10 py-5 sm:py-6 font-semibold shadow-xl hover:shadow-2xl w-full sm:w-auto rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer relative z-10"
+            onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+          >
             LINE公式アカウントで相談する
             <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
           </Button>
@@ -1087,8 +1102,8 @@ function Footer() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img
-              src="/images/kurukuru-logo.png"
-              alt="KuruKuru"
+              src="/images/lincal-logo.webp"
+              alt="LinCal"
               className="h-10 sm:h-12 w-auto brightness-0 invert"
             />
           </div>
@@ -1109,7 +1124,7 @@ function Footer() {
             <p>※ダブルブッキングを100%防止することを保証するものではありません。</p>
           </div>
           <p className="text-center text-white/50 text-xs sm:text-sm mt-4 sm:mt-6">
-            © 2025 KuruKuru. All rights reserved.
+            © 2025 LinCal. All rights reserved.
           </p>
         </div>
       </div>

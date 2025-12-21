@@ -6,7 +6,7 @@
 /* 
  * Design Philosophy: Warm Professional
  * - Airbnb/Notion inspired human-centered design
- * - KuruKuru Green (#00B96B) as primary
+ * - LinCal Green (#00B96B) as primary
  * - Warm white backgrounds with subtle shadows
  * - Card-based layout with elevation changes on hover
  * - Typography: Noto Sans JP + Outfit for numbers
@@ -54,25 +54,25 @@
 }
 
 :root {
-  /* KuruKuru Brand Colors */
-  --kurukuru-green: oklch(0.65 0.18 155);
-  --kurukuru-green-light: oklch(0.75 0.15 155);
-  --kurukuru-green-dark: oklch(0.50 0.18 155);
+  /* LinCal Brand Colors */
+  --lincal-green: oklch(0.65 0.18 155);
+  --lincal-green-light: oklch(0.75 0.15 155);
+  --lincal-green-dark: oklch(0.50 0.18 155);
   --coral-orange: oklch(0.70 0.18 30);
   --coral-orange-light: oklch(0.80 0.15 30);
 
-  /* Primary - KuruKuru Green */
-  --primary: var(--kurukuru-green);
+  /* Primary - LinCal Green */
+  --primary: var(--lincal-green);
   --primary-foreground: oklch(0.99 0 0);
 
   /* Sidebar */
-  --sidebar-primary: var(--kurukuru-green);
+  --sidebar-primary: var(--lincal-green);
   --sidebar-primary-foreground: oklch(0.99 0 0);
 
   /* Charts */
-  --chart-1: var(--kurukuru-green-light);
-  --chart-2: var(--kurukuru-green);
-  --chart-3: var(--kurukuru-green-dark);
+  --chart-1: var(--lincal-green-light);
+  --chart-2: var(--lincal-green);
+  --chart-3: var(--lincal-green-dark);
   --chart-4: var(--coral-orange);
   --chart-5: oklch(0.55 0.15 155);
 
@@ -109,7 +109,7 @@
   /* Border & Input */
   --border: oklch(0.90 0.01 90);
   --input: oklch(0.92 0.01 90);
-  --ring: var(--kurukuru-green);
+  --ring: var(--lincal-green);
 
   /* Sidebar */
   --sidebar: oklch(0.99 0.003 90);
@@ -117,13 +117,13 @@
   --sidebar-accent: oklch(0.95 0.01 155);
   --sidebar-accent-foreground: oklch(0.25 0.05 155);
   --sidebar-border: oklch(0.92 0.01 90);
-  --sidebar-ring: var(--kurukuru-green);
+  --sidebar-ring: var(--lincal-green);
 }
 
 .dark {
-  --primary: var(--kurukuru-green-light);
+  --primary: var(--lincal-green-light);
   --primary-foreground: oklch(0.15 0.02 60);
-  --sidebar-primary: var(--kurukuru-green);
+  --sidebar-primary: var(--lincal-green);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --background: oklch(0.15 0.01 60);
   --foreground: oklch(0.90 0.01 90);
@@ -141,10 +141,10 @@
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.30 0.01 60);
   --input: oklch(0.32 0.01 60);
-  --ring: var(--kurukuru-green);
-  --chart-1: var(--kurukuru-green-light);
-  --chart-2: var(--kurukuru-green);
-  --chart-3: var(--kurukuru-green-dark);
+  --ring: var(--lincal-green);
+  --chart-1: var(--lincal-green-light);
+  --chart-2: var(--lincal-green);
+  --chart-3: var(--lincal-green-dark);
   --chart-4: var(--coral-orange);
   --chart-5: oklch(0.55 0.15 155);
   --sidebar: oklch(0.18 0.01 60);
@@ -152,7 +152,7 @@
   --sidebar-accent: oklch(0.25 0.02 155);
   --sidebar-accent-foreground: oklch(0.90 0.05 155);
   --sidebar-border: oklch(0.30 0.01 60);
-  --sidebar-ring: var(--kurukuru-green);
+  --sidebar-ring: var(--lincal-green);
 }
 
 @layer base {
