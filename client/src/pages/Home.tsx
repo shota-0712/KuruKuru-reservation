@@ -84,13 +84,13 @@ function Header() {
         }`}
     >
       <div className="container">
-        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
           {/* Logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
               src="/images/LinCal_logo.webp"
               alt="LinCal"
-              className="h-14 sm:h-16 md:h-20 w-auto"
+              className="h-16 sm:h-20 md:h-24 w-auto"
             />
           </a>
 
