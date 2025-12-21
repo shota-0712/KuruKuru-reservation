@@ -349,21 +349,22 @@ function ProblemSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto space-y-4">
           {problems.map((problem, index) => (
             <motion.div
               key={index}
               variants={fadeInUp}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50 relative overflow-hidden group"
+              className="bg-white/80 rounded-xl p-4 sm:p-5 shadow-sm border border-border/50 flex items-start gap-4"
             >
-              <div className={`w-14 h-14 rounded-2xl ${problem.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <problem.icon className={`w-7 h-7 ${problem.color}`} />
+              <div className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full ${problem.bg} flex items-center justify-center`}>
+                <problem.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${problem.color}`} />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-3">{problem.title}</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                {problem.description}
-              </p>
+              <div className="text-left">
+                <h3 className="text-base sm:text-lg font-bold mb-1">{problem.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {problem.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -431,18 +432,16 @@ function FeaturesSection() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 gap-y-8 sm:gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <motion.div key={index} variants={fadeInUp}>
-              <Card className="h-full premium-card border-0">
-                <CardContent className="p-5 sm:p-6 lg:p-8">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl feature-icon-container flex items-center justify-center mb-4 sm:mb-5">
-                    <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary transition-colors relative z-10" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{feature.title}</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
+            <motion.div key={index} variants={fadeInUp} className="flex flex-col items-center text-center sm:items-start sm:text-left">
+              <div className="mb-3 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary">
+                <feature.icon className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-base sm:text-lg mb-2">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {feature.description}
+              </p>
             </motion.div>
           ))}
         </div>
