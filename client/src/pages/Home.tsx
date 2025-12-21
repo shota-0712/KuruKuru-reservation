@@ -229,21 +229,23 @@ function HeroSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
-                  className="absolute -left-6 sm:-left-12 bottom-32 sm:bottom-40 z-30"
+                  className="absolute -left-2 sm:-left-12 bottom-20 sm:bottom-40 z-30"
                 >
-                  <Card className="glass-card border-0 shadow-lg !bg-white/90">
-                    <CardContent className="p-2 sm:p-3">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 flex items-center justify-center">
-                          <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                  <div className="transform scale-75 sm:scale-100 origin-bottom-left">
+                    <Card className="glass-card border-0 shadow-lg !bg-white/95">
+                      <CardContent className="p-2 sm:p-3">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">予約が入りました</p>
+                            <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">現在 14:00〜 カット</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">予約が入りました</p>
-                          <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">現在 14:00〜 カット</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </motion.div>
 
                 {/* Floating Notification - Right */}
@@ -251,21 +253,23 @@ function HeroSection() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 }}
-                  className="absolute -right-4 sm:-right-8 top-20 z-30"
+                  className="absolute -right-2 sm:-right-8 top-12 sm:top-20 z-30"
                 >
-                  <Card className="glass-card border-0 shadow-lg !bg-white/90">
-                    <CardContent className="p-2 sm:p-3">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                          <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  <div className="transform scale-75 sm:scale-100 origin-top-right">
+                    <Card className="glass-card border-0 shadow-lg !bg-white/95">
+                      <CardContent className="p-2 sm:p-3">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">カレンダー連携済</p>
+                            <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">自動で同期しました</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">カレンダー連携済</p>
-                          <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">自動で同期しました</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
