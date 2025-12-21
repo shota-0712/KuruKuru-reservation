@@ -162,7 +162,7 @@ function HeroSection() {
       <div className="container relative z-20">
         <div className="flex flex-row items-center gap-0 sm:gap-6 lg:gap-20">
           {/* Left Column: Text Content */}
-          <div className="flex-1 text-left min-w-0 z-20">
+          <div className="flex-1 text-left min-w-0 z-20 -mr-6 sm:mr-0">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -178,9 +178,9 @@ function HeroSection() {
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h1 variants={fadeInUp} className="text-2xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-3 sm:mb-6 text-foreground leading-[1.2]">
+              <motion.h1 variants={fadeInUp} className="text-[28px] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-2 sm:mb-6 text-foreground leading-[1.1]">
                 <span className="block text-foreground whitespace-nowrap">KuruKuru</span>
-                <span className="animated-gradient-text drop-shadow-sm text-xl sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
+                <span className="animated-gradient-text drop-shadow-sm text-2xl sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
               </motion.h1>
 
               {/* Subheadline */}
