@@ -142,7 +142,7 @@ function Header() {
 // Hero Section - High Impact Redesign with Split Layout
 function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+    <section className="relative pt-24 pb-12 md:pt-40 md:pb-32 overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white/50 z-10" />
@@ -160,79 +160,60 @@ function HeroSection() {
       </div>
 
       <div className="container relative z-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-row items-center gap-0 sm:gap-6 lg:gap-20">
           {/* Left Column: Text Content */}
-          <div className="flex-1 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+          <div className="flex-1 text-left min-w-0 z-20">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
             >
               {/* Badge */}
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm sm:text-base mb-6 sm:mb-8 border border-primary/20">
-                <span className="relative flex h-3 w-3">
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-4 sm:py-2 rounded-full bg-primary/10 text-primary font-bold text-[10px] sm:text-base mb-3 sm:mb-8 border border-primary/20">
+                <span className="relative flex h-2 w-2 sm:h-3 sm:w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                  <span className="relative inline-flex rounded-full h-full w-full bg-primary"></span>
                 </span>
-                スマホ完結！接客業のための予約システム
+                <span className="whitespace-nowrap">スマホ完結！予約システム</span>
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-6 text-foreground leading-[1.15]">
-                <span className="block text-foreground">KuruKuru</span>
-                <span className="animated-gradient-text drop-shadow-sm">LINE予約システム</span>
+              <motion.h1 variants={fadeInUp} className="text-2xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-3 sm:mb-6 text-foreground leading-[1.2]">
+                <span className="block text-foreground whitespace-nowrap">KuruKuru</span>
+                <span className="animated-gradient-text drop-shadow-sm text-xl sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
               </motion.h1>
 
               {/* Subheadline */}
-              <motion.p variants={fadeInUp} className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 leading-relaxed font-medium">
-                サロン・ジム・治療院など、あらゆる店舗ビジネスに。<br className="hidden lg:block" />
-                <span className="text-foreground font-bold">月額1,980円</span>から始める、最もシンプルなDX。
+              <motion.p variants={fadeInUp} className="text-xs sm:text-xl lg:text-2xl text-muted-foreground mb-4 sm:mb-10 leading-relaxed font-medium line-clamp-2 sm:line-clamp-none">
+                サロン・ジム・治療院など<br className="sm:hidden" />
+                <span className="text-foreground font-bold">月額1,980円</span>からのDX。
               </motion.p>
 
-              {/* CTA Buttons */}
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10 sm:mb-12">
-                <Button className="glow-btn text-lg px-8 py-7 rounded-2xl font-bold text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+              {/* CTA Buttons - Simplified for mobile side-by-side */}
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-start mb-4 sm:mb-12">
+                <Button className="glow-btn text-xs sm:text-lg px-4 sm:px-8 py-3 sm:py-7 rounded-lg sm:rounded-2xl font-bold text-white shadow-md sm:shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-fit">
                   無料で相談する
-                  <ChevronRight className="w-5 h-5 ml-1" />
+                  <ChevronRight className="w-3 h-3 sm:w-5 sm:h-5 ml-1" />
                 </Button>
-                <Button variant="outline" className="text-lg px-8 py-7 rounded-2xl font-bold border-2 bg-white/50 backdrop-blur-sm hover:bg-white transition-all">
-                  機能を見る
-                </Button>
-              </motion.div>
-
-              {/* Trust Indicators */}
-              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start text-sm sm:text-base font-medium text-muted-foreground">
-                <div className="flex items-center gap-2 bg-white/60 backdrop-blur px-3 py-1.5 rounded-lg border border-border/50">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>初期費用0円</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/60 backdrop-blur px-3 py-1.5 rounded-lg border border-border/50">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>チャット機能込み</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/60 backdrop-blur px-3 py-1.5 rounded-lg border border-border/50">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>最短即日導入</span>
-                </div>
               </motion.div>
             </motion.div>
           </div>
 
           {/* Right Column: Phone Mockup */}
-          <div className="flex-1 w-full max-w-[260px] sm:max-w-[320px] lg:max-w-[420px] mx-auto">
+          <div className="flex-none w-[45%] sm:flex-1 sm:w-full max-w-[140px] sm:max-w-[380px] lg:max-w-none mx-auto z-10 -mr-6 sm:mr-0">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative z-10 perspective-1000"
+              className="relative perspective-1000"
             >
-              <div className="relative transform rotate-y-[-10deg] hover:rotate-y-0 transition-transform duration-700 ease-out">
+              <div className="relative transform rotate-y-[-10deg] hover:rotate-y-0 transition-transform duration-700 ease-out scale-90 sm:scale-100 origin-right sm:origin-center">
                 {/* Glow behind phone */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-3xl opacity-60 animate-pulse" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-2xl sm:blur-3xl opacity-60 animate-pulse" />
 
                 {/* Phone Frame */}
-                <div className="relative bg-gray-900 rounded-[2.5rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/20">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-xl z-20" />
+                <div className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-gray-900 shadow-xl sm:shadow-2xl overflow-hidden ring-1 ring-white/20">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
                   <img
                     src="/images/screenshots/IMG_2951.png"
                     alt="KuruKuru App Interface"
@@ -322,7 +303,7 @@ function ProblemSection() {
   ];
 
   return (
-    <AnimatedSection className="py-20 sm:py-28 bg-secondary/30 relative overflow-hidden">
+    <AnimatedSection className="py-12 sm:py-28 bg-secondary/30 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl opacity-50" />
@@ -330,7 +311,7 @@ function ProblemSection() {
       </div>
 
       <div className="container relative z-10">
-        <motion.div variants={fadeInUp} className="text-center mb-12 sm:mb-16">
+        <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary text-muted-foreground text-xs sm:text-sm font-medium mb-4">
             Current Challenges
           </span>
@@ -370,7 +351,7 @@ function ProblemSection() {
         {/* Arrow connecting to solution */}
         <motion.div
           variants={fadeInUp}
-          className="flex justify-center mt-12 sm:mt-16"
+          className="flex justify-center mt-8 sm:mt-16"
         >
           <div className="flex flex-col items-center text-primary/80">
             <span className="text-sm font-medium mb-2">すべてKuruKuruで解決</span>
@@ -418,9 +399,9 @@ function FeaturesSection() {
   ];
 
   return (
-    <AnimatedSection id="features" className="py-12 sm:py-16 md:py-20 lg:py-28">
+    <AnimatedSection id="features" className="py-10 sm:py-16 md:py-20 lg:py-28">
       <div className="container">
-        <motion.div variants={fadeInUp} className="text-center mb-10 sm:mb-16">
+        <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-16">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
             KuruKuruでできること
           </h2>
