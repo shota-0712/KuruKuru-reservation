@@ -1,4 +1,4 @@
-```
+
 /**
  * LinCal Landing Page
  * Design Philosophy: Warm Professional
