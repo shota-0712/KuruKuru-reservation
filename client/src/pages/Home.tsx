@@ -1,9 +1,10 @@
+```
 /**
- * KuruKuru Landing Page
+ * LinCal Landing Page
  * Design Philosophy: Warm Professional
  * - Human-centered design with warmth and trust
  * - Card-based layout with elevation changes
- * - KuruKuru Green (#00B96B) as primary
+ * * LinCal Green (#00B96B) as primary
  * - Coral Orange for CTAs
  * - Mobile-first responsive design
  */
@@ -87,8 +88,8 @@ function Header() {
           {/* Logo - Using actual KuruKuru logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
-              src="/images/kurukuru-logo.png"
-              alt="KuruKuru"
+              src="/images/lincal-logo.png"
+              alt="LinCal"
               className="h-14 sm:h-16 md:h-20 w-auto"
             />
           </a>
@@ -179,7 +180,7 @@ function HeroSection() {
 
               {/* Main Headline */}
               <motion.h1 variants={fadeInUp} className="text-[34px] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-2 sm:mb-6 text-foreground leading-none">
-                <span className="block text-foreground whitespace-nowrap">KuruKuru</span>
+                <span className="block text-foreground whitespace-nowrap">LinCal</span>
                 <span className="animated-gradient-text drop-shadow-sm text-[26px] sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
               </motion.h1>
 
@@ -358,7 +359,7 @@ function ProblemSection() {
           className="flex justify-center mt-8 sm:mt-16"
         >
           <div className="flex flex-col items-center text-primary/80">
-            <span className="text-sm font-medium mb-2">すべてKuruKuruで解決</span>
+            <span className="text-sm font-medium mb-2">すべてLinCalで解決</span>
             <ArrowDown className="w-6 h-6 animate-bounce" />
           </div>
         </motion.div>
@@ -407,7 +408,7 @@ function FeaturesSection() {
       <div className="container">
         <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-16">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-            KuruKuruでできること
+            LinCalでできること
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             お客様はLINEで予約、店舗側はGoogleカレンダーで管理。
