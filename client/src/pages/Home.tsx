@@ -88,7 +88,7 @@ function Header() {
           {/* Logo - Using actual KuruKuru logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
-              src="/images/lincal-logo.png"
+              src="/images/lincal-logo.webp"
               alt="LinCal"
               className="h-14 sm:h-16 md:h-20 w-auto"
             />
@@ -148,7 +148,7 @@ function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white/50 z-10" />
         <img
-          src="/images/hero-salon-new.jpg"
+          src="/images/hero-salon-new.webp"
           alt=""
           className="w-full h-full object-cover opacity-30"
         />
@@ -603,7 +603,7 @@ function HowItWorksSection() {
           <motion.div variants={fadeInUp} className="order-2 lg:order-1">
             <div className="relative">
               <img
-                src="/images/happy-owner.jpg"
+                src="/images/happy-owner.webp"
                 alt="スマホで予約管理をするサロンオーナー"
                 className="rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl w-full"
               />
@@ -671,7 +671,7 @@ function PricingSection() {
         "メニュー管理・画像アップロード"
       ],
       popular: false,
-      image: "/images/happy-owner.jpg",
+      image: "/images/happy-owner.webp",
       imagePosition: "object-center"
     },
     {
@@ -686,7 +686,7 @@ function PricingSection() {
         "複数枠の予約管理"
       ],
       popular: true,
-      image: "/images/gym-trainer.jpg",
+      image: "/images/gym-trainer.webp",
       imagePosition: "object-top" // Focus on face
     },
     {
@@ -701,7 +701,7 @@ function PricingSection() {
         "指名予約のスムーズな運用"
       ],
       popular: false,
-      image: "/images/clinic-salon.jpg",
+      image: "/images/clinic-salon.webp",
       imagePosition: "object-center"
     }
   ];
