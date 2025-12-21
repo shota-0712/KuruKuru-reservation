@@ -157,7 +157,7 @@ function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white/50 z-10" />
         <img
           src="/images/hero-salon-new.webp"
-          alt=""
+          alt="サロン店内イメージ"
           className="w-full h-full object-cover opacity-30"
         />
         <div className="absolute inset-0 grid-bg opacity-30 z-0" />
@@ -227,8 +227,8 @@ function HeroSection() {
                 <div className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-gray-900 shadow-xl sm:shadow-2xl overflow-hidden ring-1 ring-white/20">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
                   <img
-                    src="/images/screenshots/IMG_2951.png"
-                    alt="LinCal App Interface"
+                    src="/images/screenshots/S__28786696_0.jpg"
+                    alt="LinCal LINE予約システムのメニュー選択画面"
                     className="w-full h-auto bg-white"
                   />
 
@@ -454,23 +454,23 @@ function ScreenshotsSection() {
 
   // Customer screens (5 images) - Using images with LINE header
   const customerScreens = [
-    { src: "/images/screenshots/IMG_2951.png", title: "メニュー選択", description: "写真付きメニューから直感的に選択" },
-    { src: "/images/screenshots/IMG_2952.png", title: "日時選択", description: "空き状況を確認して予約" },
-    { src: "/images/screenshots/IMG_2953.png", title: "予約確認", description: "予約内容を確認して完了" },
-    { src: "/images/screenshots/IMG_2965.PNG", title: "マイページ", description: "予約履歴の確認・変更" },
-    { src: "/images/screenshots/IMG_2955.png", title: "予約詳細", description: "予約の詳細を確認" },
+    { src: "/images/screenshots/S__28786696_0.jpg", title: "メニュー選択", description: "写真付きメニューから直感的に選択" },
+    { src: "/images/screenshots/S__28786697_0.jpg", title: "日時選択", description: "空き状況を確認して予約" },
+    { src: "/images/screenshots/S__28786698_0.jpg", title: "予約確認", description: "予約内容を確認して完了" },
+    { src: "/images/screenshots/S__28786699_0.jpg", title: "マイページ", description: "予約履歴の確認・変更" },
+    { src: "/images/screenshots/S__28786700_0.jpg", title: "予約詳細", description: "予約の詳細を確認" },
   ];
 
   // Admin screens (8 images) - Using images with LINE header
   const adminScreens = [
-    { src: "/images/screenshots/IMG_2956.png", title: "管理トップ", description: "店舗管理のダッシュボード" },
-    { src: "/images/screenshots/IMG_2957.png", title: "予約一覧", description: "本日の予約を一覧表示" },
-    { src: "/images/screenshots/IMG_2958.png", title: "予約詳細", description: "予約の詳細情報を確認" },
-    { src: "/images/screenshots/IMG_2960.png", title: "メニュー管理", description: "メニューの追加・編集" },
-    { src: "/images/screenshots/IMG_2961.png", title: "メニュー編集", description: "価格・時間の設定" },
-    { src: "/images/screenshots/IMG_2962.png", title: "シフト管理", description: "営業時間・休日の設定" },
-    { src: "/images/screenshots/IMG_2963.png", title: "カレンダー連携", description: "Googleカレンダーと同期" },
-    { src: "/images/screenshots/IMG_2964.png", title: "スタッフ管理", description: "スタッフの追加・権限設定" },
+    { src: "/images/screenshots/S__28786701_0.jpg", title: "管理トップ", description: "店舗管理のダッシュボード" },
+    { src: "/images/screenshots/S__28786702_0.jpg", title: "予約一覧", description: "本日の予約を一覧表示" },
+    { src: "/images/screenshots/S__28786703_0.jpg", title: "予約詳細", description: "予約の詳細情報を確認" },
+    { src: "/images/screenshots/S__28786704_0.jpg", title: "メニュー管理", description: "メニューの追加・編集" },
+    { src: "/images/screenshots/S__28786705_0.jpg", title: "メニュー編集", description: "価格・時間の設定" },
+    { src: "/images/screenshots/S__28786707_0.jpg", title: "シフト管理", description: "営業時間・休日の設定" },
+    { src: "/images/screenshots/S__28786708_0.jpg", title: "カレンダー連携", description: "Googleカレンダーと同期" },
+    { src: "/images/screenshots/S__28786709_0.jpg", title: "スタッフ管理", description: "スタッフの追加・権限設定" },
   ];
 
   const currentScreens = activeTab === 'customer' ? customerScreens : adminScreens;

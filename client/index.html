@@ -18,6 +18,7 @@
   <meta property="og:image" content="https://lincal-reserve.com/images/og-image.png" />
   <meta property="og:url" content="https://lincal-reserve.com" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LinCal - LINE×Googleカレンダー連携予約システム" />
   <meta name="twitter:description"
@@ -36,7 +37,7 @@
   <!-- Apple Touch Icon -->
   <link rel="apple-touch-icon" href="/images/LinCal_logo.webp" />
 
-  <!-- Structured Data (JSON-LD) -->
+  <!-- Structured Data (JSON-LD) - SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,6 +56,8 @@
     "image": "https://lincal-reserve.com/images/LinCal_logo.webp"
   }
   </script>
+
+  <!-- Structured Data (JSON-LD) - Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,6 +67,72 @@
     "logo": "https://lincal-reserve.com/images/LinCal_logo.webp",
     "description": "LINE×Googleカレンダー連携予約システムを提供するサービス",
     "sameAs": []
+  }
+  </script>
+
+  <!-- Structured Data (JSON-LD) - BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://lincal-reserve.com/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data (JSON-LD) - FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "初期費用はかかりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ、初期費用は0円です。月額料金のみでご利用いただけます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "契約期間の縛りはありますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "最低契約期間などの縛りはありません。いつでも解約可能です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "お客様はアプリをインストールする必要がありますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ、お客様はいつものLINEアプリから予約できます。新しいアプリのインストールは不要です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "パソコンがなくても使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、すべての操作がスマートフォンのLINEから行えます。パソコンは必要ありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "導入までどのくらいかかりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GoogleカレンダーとLINE公式アカウントの連携設定が完了次第、すぐにご利用いただけます。設定のサポートも行っております。"
+        }
+      }
+    ]
   }
   </script>
 </head>
