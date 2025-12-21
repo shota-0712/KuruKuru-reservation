@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://lincal.jp/sitemap.xml
+Sitemap: https://lincal-reserve.com/sitemap.xml
