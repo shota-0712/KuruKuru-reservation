@@ -88,7 +88,7 @@ function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
-              src="/images/lincal-logo.webp"
+              src="/images/LinCal_logo.webp"
               alt="LinCal"
               className="h-14 sm:h-16 md:h-20 w-auto"
             />
@@ -886,7 +886,7 @@ function ComparisonSection() {
                 <th className="text-left p-3 sm:p-4 bg-muted/50 rounded-tl-lg text-xs sm:text-sm font-semibold">機能</th>
                 <th className="p-3 sm:p-4 bg-primary/10 text-primary text-xs sm:text-sm font-bold">
                   <div className="flex items-center justify-center gap-1">
-                    <img src="/images/lincal-logo.webp" alt="LinCal" className="h-5 sm:h-6 w-auto" />
+                    <img src="/images/LinCal_logo.webp" alt="LinCal" className="h-5 sm:h-6 w-auto" />
                   </div>
                 </th>
                 <th className="p-3 sm:p-4 bg-muted/50 text-xs sm:text-sm font-semibold text-muted-foreground">他社A</th>
@@ -924,27 +924,27 @@ function TestimonialsSection() {
     {
       quote: "今まで公式LINEで直接やり取りしていたので、すごく楽になりました",
       author: "美容室オーナー",
-      image: "/images/happy-owner.jpg"
+      image: "/images/happy-owner.webp"
     },
     {
       quote: "予約のやり取りが減って、施術・接客に集中できるようになりました",
       author: "エステサロン経営",
-      image: "/images/treatment-room.jpg"
+      image: "/images/treatment-room.webp"
     },
     {
       quote: "「空いてますか？」「何時がいいですか？」の往復が減って助かります",
       author: "整体院オーナー",
-      image: "/images/gym-trainer.jpg"
+      image: "/images/gym-trainer.webp"
     },
     {
       quote: "予約が入った時にLINEで通知が来るので、見落としが減りました",
       author: "ネイルサロン経営",
-      image: "/images/happy-owner.jpg"
+      image: "/images/happy-owner.webp"
     },
     {
       quote: "スマホだけで変更できるのが現場的にありがたいです",
       author: "パーソナルジム経営",
-      image: "/images/gym-trainer.jpg"
+      image: "/images/gym-trainer.webp"
     }
   ];
 
@@ -1102,7 +1102,7 @@ function Footer() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img
-              src="/images/lincal-logo.webp"
+              src="/images/LinCal_logo.webp"
               alt="LinCal"
               className="h-10 sm:h-12 w-auto brightness-0 invert"
             />
