@@ -154,18 +154,18 @@ function HeroSection() {
     <section className="relative pt-24 pb-12 md:pt-40 md:pb-32 overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white/50 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/80 z-10" />
         <img
-          src="/images/hero-salon-new.webp"
+          src="/images/clinic-salon.webp"
           alt="サロン店内イメージ"
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover object-[75%] sm:object-center opacity-80"
         />
-        <div className="absolute inset-0 grid-bg opacity-30 z-0" />
+        <div className="absolute inset-0 grid-bg opacity-20 z-0" />
 
         {/* Animated Blobs */}
-        <div className="floating-blob floating-blob-1 opacity-40 mix-blend-multiply" />
-        <div className="floating-blob floating-blob-2 opacity-40 mix-blend-multiply" />
-        <div className="floating-blob floating-blob-3 opacity-40 mix-blend-multiply" />
+        <div className="floating-blob floating-blob-1 opacity-20 mix-blend-multiply" />
+        <div className="floating-blob floating-blob-2 opacity-20 mix-blend-multiply" />
+        <div className="floating-blob floating-blob-3 opacity-20 mix-blend-multiply" />
       </div>
 
       <div className="container relative z-20">
@@ -191,9 +191,9 @@ function HeroSection() {
                 <img
                   src="/logo_moji.png"
                   alt="LinCal"
-                  className="h-12 sm:h-16 lg:h-20 w-auto mb-1 sm:mb-2"
+                  className="h-10 sm:h-16 lg:h-20 w-auto mb-1 sm:mb-2"
                 />
-                <span className="block animated-gradient-text drop-shadow-sm text-[26px] sm:text-5xl lg:text-6xl font-extrabold whitespace-nowrap">LINE予約システム</span>
+                <span className="block animated-gradient-text drop-shadow-sm text-[22px] sm:text-5xl lg:text-6xl font-extrabold whitespace-nowrap">LINE予約システム</span>
               </motion.div>
 
               {/* Subheadline */}
@@ -292,7 +292,7 @@ function HeroSection() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
