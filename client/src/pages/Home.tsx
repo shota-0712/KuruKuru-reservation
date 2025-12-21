@@ -200,14 +200,14 @@ function HeroSection() {
           </div>
 
           {/* Right Column: Phone Mockup */}
-          <div className="flex-none w-[45%] sm:flex-1 sm:w-full max-w-[140px] sm:max-w-[380px] lg:max-w-none mx-auto z-10 -mr-6 sm:mr-0">
+          <div className="flex-none w-[48%] sm:flex-1 sm:w-full max-w-[160px] sm:max-w-[380px] lg:max-w-none mx-auto z-10 -mr-2 sm:mr-0">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative perspective-1000"
             >
-              <div className="relative transform rotate-y-[-10deg] hover:rotate-y-0 transition-transform duration-700 ease-out scale-90 sm:scale-100 origin-right sm:origin-center">
+              <div className="relative transform rotate-y-[-10deg] hover:rotate-y-0 transition-transform duration-700 ease-out scale-100 sm:scale-100 origin-center">
                 {/* Glow behind phone */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-2xl sm:blur-3xl opacity-60 animate-pulse" />
 
