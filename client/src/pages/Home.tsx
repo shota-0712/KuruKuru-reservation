@@ -191,9 +191,9 @@ function HeroSection() {
 
               {/* CTA Buttons - Simplified for mobile side-by-side */}
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-start mb-4 sm:mb-12">
-                <Button className="glow-btn text-xs sm:text-lg px-4 sm:px-8 py-3 sm:py-7 rounded-lg sm:rounded-2xl font-bold text-white shadow-md sm:shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-fit">
+                <Button className="glow-btn text-sm sm:text-lg px-5 sm:px-8 py-3.5 sm:py-7 rounded-lg sm:rounded-2xl font-bold text-white shadow-md sm:shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-fit">
                   無料で相談する
-                  <ChevronRight className="w-3 h-3 sm:w-5 sm:h-5 ml-1" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
                 </Button>
               </motion.div>
             </motion.div>
