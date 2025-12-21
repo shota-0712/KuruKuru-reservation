@@ -84,13 +84,13 @@ function Header() {
         }`}
     >
       <div className="container">
-        <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-18">
           {/* Logo */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2">
             <img
-              src="/images/LinCal_logo.webp"
+              src="/logo_toumei.png"
               alt="LinCal"
-              className="h-16 sm:h-20 md:h-24 w-auto"
+              className="h-10 sm:h-12 md:h-16 w-auto"
             />
           </a>
 
@@ -187,10 +187,14 @@ function HeroSection() {
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h1 variants={fadeInUp} className="text-[34px] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-2 sm:mb-6 text-foreground leading-none">
-                <span className="block text-foreground whitespace-nowrap">LinCal</span>
-                <span className="animated-gradient-text drop-shadow-sm text-[26px] sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
-              </motion.h1>
+              <motion.div variants={fadeInUp} className="mb-2 sm:mb-6">
+                <img
+                  src="/logo_moji.png"
+                  alt="LinCal"
+                  className="h-12 sm:h-16 lg:h-20 w-auto mb-1 sm:mb-2"
+                />
+                <span className="block animated-gradient-text drop-shadow-sm text-[26px] sm:text-5xl lg:text-6xl font-extrabold whitespace-nowrap">LINE予約システム</span>
+              </motion.div>
 
               {/* Subheadline */}
               <motion.p variants={fadeInUp} className="text-xs sm:text-xl lg:text-2xl text-muted-foreground mb-4 sm:mb-10 leading-relaxed font-medium line-clamp-2 sm:line-clamp-none">
@@ -696,7 +700,7 @@ function PricingSection() {
         "「10時は3名様まで」などの設定",
         "複数枠の予約管理"
       ],
-      popular: true,
+      popular: false,
       image: "/images/gym-trainer.webp",
       imagePosition: "object-top" // Focus on face
     },
@@ -733,6 +737,9 @@ function PricingSection() {
             あなたのビジネスに合わせて選べる、シンプルな料金体系。<br className="hidden sm:block" />
             どのプランでもチャット機能は標準搭載（追加0円）です。
           </p>
+          <p className="text-base text-muted-foreground mt-4">
+            <span className="font-semibold text-foreground">初期費用：19,800円（税込）</span>
+          </p>
         </motion.div>
       </div>
 
@@ -745,37 +752,30 @@ function PricingSection() {
               className={`relative ${plan.popular ? 'lg:-mt-8 lg:mb-8 z-10' : ''}`}
             >
               <Card className={`h-full border-0 shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${plan.popular ? 'ring-4 ring-primary/20 scale-105 shadow-2xl' : ''}`}>
-                {/* Full Width Image Header */}
-                <div className="relative h-48 sm:h-56 w-full overflow-hidden group">
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300 z-10" />
-                  <img
-                    src={plan.image}
-                    alt={plan.name}
-                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${plan.imagePosition}`}
-                  />
+                {/* Gradient Header */}
+                <div className={`relative h-24 sm:h-28 w-full flex items-center justify-center ${plan.popular ? 'bg-gradient-to-br from-primary to-primary/80' : 'bg-gradient-to-br from-secondary to-secondary/80'}`}>
                   {plan.popular && (
                     <div className="absolute top-4 right-4 z-20">
-                      <span className="bg-primary text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-lg shimmer">
+                      <span className="bg-white text-primary text-sm font-bold px-4 py-1.5 rounded-full shadow-lg">
                         一番人気
                       </span>
                     </div>
                   )}
+                  <h3 className={`text-2xl sm:text-3xl font-bold ${plan.popular ? 'text-white' : 'text-foreground'}`}>
+                    {plan.name}
+                  </h3>
                 </div>
 
                 <CardContent className="p-6 sm:p-8">
                   <div className="mb-6">
-                    <h3 className="text-xl font-bold mb-2 flex items-center justify-between">
-                      {plan.name}プラン
-                      {!plan.popular && <span className="text-xs font-normal text-muted-foreground bg-secondary px-2 py-1 rounded-md">月額払い</span>}
-                    </h3>
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-1 mb-3">
                       <span className="text-sm text-muted-foreground font-medium">月額</span>
                       <span className={`text-4xl sm:text-5xl font-display font-bold ${plan.popular ? 'text-primary' : 'text-foreground'}`}>
                         {plan.price}
                       </span>
                       <span className="text-sm text-foreground font-medium">円</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {plan.description}
                     </p>
                   </div>
@@ -923,28 +923,23 @@ function TestimonialsSection() {
   const testimonials = [
     {
       quote: "今まで公式LINEで直接やり取りしていたので、すごく楽になりました",
-      author: "美容室オーナー",
-      image: "/images/happy-owner.webp"
+      author: "美容室オーナー"
     },
     {
       quote: "予約のやり取りが減って、施術・接客に集中できるようになりました",
-      author: "エステサロン経営",
-      image: "/images/treatment-room.webp"
+      author: "エステサロン経営"
     },
     {
       quote: "「空いてますか？」「何時がいいですか？」の往復が減って助かります",
-      author: "整体院オーナー",
-      image: "/images/gym-trainer.webp"
+      author: "整体院オーナー"
     },
     {
       quote: "予約が入った時にLINEで通知が来るので、見落としが減りました",
-      author: "ネイルサロン経営",
-      image: "/images/happy-owner.webp"
+      author: "ネイルサロン経営"
     },
     {
       quote: "スマホだけで変更できるのが現場的にありがたいです",
-      author: "パーソナルジム経営",
-      image: "/images/gym-trainer.webp"
+      author: "パーソナルジム経営"
     }
   ];
 
@@ -965,21 +960,12 @@ function TestimonialsSection() {
             <motion.div key={index} variants={fadeInUp}>
               <Card className="h-full glass-card border-0">
                 <CardContent className="p-4 sm:p-6">
-                  <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-medium text-xs sm:text-sm">{testimonial.author}</p>
-                      <div className="flex gap-0.5">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <p className="font-medium text-xs sm:text-sm text-primary">{testimonial.author}</p>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
                     </div>
                   </div>
                   <p className="text-sm sm:text-base text-foreground leading-relaxed">
@@ -1002,7 +988,7 @@ function FAQSection() {
   const faqs = [
     {
       question: "初期費用はかかりますか？",
-      answer: "いいえ、初期費用は0円です。月額料金のみでご利用いただけます。"
+      answer: "はい、初期費用として19,800円（税込）がかかります。これには初期設定サポートが含まれます。"
     },
     {
       question: "契約期間の縛りはありますか？",
