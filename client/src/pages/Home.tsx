@@ -178,9 +178,9 @@ function HeroSection() {
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h1 variants={fadeInUp} className="text-[28px] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-2 sm:mb-6 text-foreground leading-[1.1]">
+              <motion.h1 variants={fadeInUp} className="text-[34px] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-2 sm:mb-6 text-foreground leading-none">
                 <span className="block text-foreground whitespace-nowrap">KuruKuru</span>
-                <span className="animated-gradient-text drop-shadow-sm text-2xl sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
+                <span className="animated-gradient-text drop-shadow-sm text-[26px] sm:text-5xl lg:text-6xl whitespace-nowrap">LINE予約システム</span>
               </motion.h1>
 
               {/* Subheadline */}
