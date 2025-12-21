@@ -458,19 +458,19 @@ function ScreenshotsSection() {
     { src: "/images/screenshots/S__28786697_0.jpg", title: "日時選択", description: "空き状況を確認して予約" },
     { src: "/images/screenshots/S__28786698_0.jpg", title: "予約確認", description: "予約内容を確認して完了" },
     { src: "/images/screenshots/S__28786699_0.jpg", title: "マイページ", description: "予約履歴の確認・変更" },
-    { src: "/images/screenshots/S__28786700_0.jpg", title: "予約詳細", description: "予約の詳細を確認" },
+    { src: "/images/screenshots/S__28786700_0.jpg", title: "予約詳細&キャンセル", description: "予約の詳細を確認" },
   ];
 
   // Admin screens (8 images) - Using images with LINE header
   const adminScreens = [
-    { src: "/images/screenshots/S__28786701_0.jpg", title: "管理トップ", description: "店舗管理のダッシュボード" },
-    { src: "/images/screenshots/S__28786702_0.jpg", title: "予約一覧", description: "本日の予約を一覧表示" },
-    { src: "/images/screenshots/S__28786703_0.jpg", title: "予約詳細", description: "予約の詳細情報を確認" },
-    { src: "/images/screenshots/S__28786704_0.jpg", title: "メニュー管理", description: "メニューの追加・編集" },
-    { src: "/images/screenshots/S__28786705_0.jpg", title: "メニュー編集", description: "価格・時間の設定" },
-    { src: "/images/screenshots/S__28786707_0.jpg", title: "シフト管理", description: "営業時間・休日の設定" },
-    { src: "/images/screenshots/S__28786708_0.jpg", title: "カレンダー連携", description: "Googleカレンダーと同期" },
-    { src: "/images/screenshots/S__28786709_0.jpg", title: "スタッフ管理", description: "スタッフの追加・権限設定" },
+    { src: "/images/screenshots/S__28786701_0.jpg", title: "予約一覧", description: "予約の一覧表示" },
+    { src: "/images/screenshots/S__28786702_0.jpg", title: "メニュー管理", description: "メニューの追加・編集" },
+    { src: "/images/screenshots/S__28786703_0.jpg", title: "メニュー編集", description: "価格・時間の設定" },
+    { src: "/images/screenshots/S__28786704_0.jpg", title: "施術者管理", description: "スタッフの追加・編集" },
+    { src: "/images/screenshots/S__28786705_0.jpg", title: "施術者編集", description: "担当者の詳細設定" },
+    { src: "/images/screenshots/S__28786707_0.jpg", title: "店舗情報設定", description: "店舗の基本情報を設定" },
+    { src: "/images/screenshots/S__28786708_0.jpg", title: "営業時間設定", description: "営業時間・休日の設定" },
+    { src: "/images/screenshots/S__28786709_0.jpg", title: "予約完了時の通知", description: "LINEで予約完了通知する文面の設定" },
   ];
 
   const currentScreens = activeTab === 'customer' ? customerScreens : adminScreens;
