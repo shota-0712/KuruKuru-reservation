@@ -61,12 +61,38 @@ echo -n "price_xxxxx" | gcloud secrets create STRIPE_PRICE_SETUP --data-file=-
 
 ### 3. GCPサービスアカウントの権限設定
 
-Cloud Runにデプロイするサービスアカウントに、Secret Managerへのアクセス権限を付与:
+GitHub Actionsで使用するサービスアカウントに、以下の権限を付与する必要があります:
+
+#### Secret Managerへのアクセス権限
 
 ```bash
-gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
-  --member="serviceAccount:YOUR_SERVICE_ACCOUNT@YOUR_PROJECT_ID.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
   --role="roles/secretmanager.secretAccessor"
+```
+
+#### Artifact Registryへのアクセス権限（`--source` オプション使用時）
+
+`--source .` オプションを使用してデプロイする場合、Cloud BuildがArtifact Registryにアクセスする必要があります:
+
+```bash
+# Artifact Registry Writer ロールを付与
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.writer"
+
+# Cloud Build Service Account にも権限を付与（必要に応じて）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')@cloudbuild.gserviceaccount.com" \
+  --role="roles/artifactregistry.writer"
+```
+
+#### Cloud Run Admin ロール（デプロイに必要）
+
+```bash
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/run.admin"
 ```
 
 ### 4. デプロイ
@@ -94,6 +120,21 @@ git push origin main
 1. `.env.production.example` を参考に、すべての必須環境変数が設定されているか確認
 2. GCP Secret Managerにバックエンド用の環境変数が設定されているか確認
 3. Cloud Runのログを確認: `gcloud run services logs read lincal-landing --region asia-northeast1`
+
+### Artifact Registry の権限エラー
+
+`PERMISSION_DENIED: Permission 'artifactregistry.repositories.get' denied` というエラーが出る場合:
+
+1. サービスアカウントに Artifact Registry の権限が付与されているか確認:
+   ```bash
+   gcloud projects get-iam-policy kurukuru-reservation \
+     --flatten="bindings[].members" \
+     --filter="bindings.members:github-actions@kurukuru-reservation.iam.gserviceaccount.com"
+   ```
+
+2. 上記の「Artifact Registryへのアクセス権限」セクションのコマンドを実行して権限を付与
+
+3. 権限が反映されるまで数分待ってから再デプロイ
 
 ## 環境変数の確認方法
 
