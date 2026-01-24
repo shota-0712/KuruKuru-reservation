@@ -1100,6 +1100,85 @@ function CTASection() {
   );
 }
 
+// MyPage Section - For existing customers
+function MyPageSection() {
+  return (
+    <AnimatedSection id="mypage" className="py-12 sm:py-16 bg-secondary/50">
+      <div className="container">
+        <motion.div variants={fadeInUp} className="text-center mb-8 sm:mb-12">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 text-xs sm:text-sm text-muted-foreground border border-border/60">
+            契約者専用
+          </span>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mt-3 mb-3">
+            マイページのご案内
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground">
+            ご契約中のお客様はログインして契約状況の確認・プラン変更ができます。
+          </p>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-2">
+            ※初めての方は、まずLINEでお問い合わせください。
+          </p>
+        </motion.div>
+
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
+          <motion.div variants={fadeInUp}>
+            <Card className="border-0 shadow-lg bg-white/90">
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-base sm:text-lg mb-2">
+                      まずはLINEでお問い合わせ
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      ご要望を伺ったうえで、最適なプランをご提案いたします。
+                    </p>
+                    <Button
+                      className="glow-btn text-white w-full sm:w-auto"
+                      onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+                    >
+                      LINEで相談する
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div variants={fadeInUp}>
+            <Card className="border-0 shadow-lg bg-white/90">
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-secondary/80 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-base sm:text-lg mb-2">
+                      ご契約中のお客様
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      契約状況の確認・プラン変更・請求管理はこちらから。
+                    </p>
+                    <Button variant="outline" className="w-full sm:w-auto" asChild>
+                      <a href="/mypage">
+                        マイページへログイン
+                        <ChevronRight className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
+
 // Footer - Mobile optimized
 function Footer() {
   return (
@@ -1124,6 +1203,7 @@ function Footer() {
             <a href="#testimonials" className="hover:text-white transition-colors">導入事例</a>
             <a href="#faq" className="hover:text-white transition-colors">よくある質問</a>
             <a href="https://lin.ee/tH2mCjG" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">お問い合わせ</a>
+            <a href="/mypage" className="hover:text-white transition-colors">マイページ</a>
           </nav>
         </div>
 
@@ -1213,6 +1293,7 @@ export default function Home() {
         <TestimonialsSection />
         <FAQSection />
         <CTASection />
+        <MyPageSection />
       </main>
       <Footer />
       <FloatingCTA />
