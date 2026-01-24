@@ -55,23 +55,27 @@ jobs:
             --description="Cloud Run source deploy repository" \
             2>&1 || echo "Repository may already exist, continuing..."
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$SERVICE_NAME:latest .
+
+      - name: Authenticate Docker to Artifact Registry
+        run: |
+          gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
+
+      - name: Push Docker image to Artifact Registry
+        run: |
+          docker push $REGION-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$SERVICE_NAME:latest
+
       - name: Deploy to Cloud Run
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
-          VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
-          VITE_ANALYTICS_ENDPOINT: ${{ secrets.VITE_ANALYTICS_ENDPOINT }}
-          VITE_ANALYTICS_WEBSITE_ID: ${{ secrets.VITE_ANALYTICS_WEBSITE_ID }}
         run: |
           gcloud run deploy $SERVICE_NAME \
-            --source . \
+            --image $REGION-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$SERVICE_NAME:latest \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated \
-            --set-build-env-vars="VITE_SUPABASE_URL=$VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY,VITE_STRIPE_PUBLISHABLE_KEY=$VITE_STRIPE_PUBLISHABLE_KEY,VITE_APP_URL=$VITE_APP_URL,VITE_ANALYTICS_ENDPOINT=$VITE_ANALYTICS_ENDPOINT,VITE_ANALYTICS_WEBSITE_ID=$VITE_ANALYTICS_WEBSITE_ID" \
             --set-env-vars="NODE_ENV=production" \
-            --set-secrets="SUPABASE_SERVICE_ROLE_KEY=SUPABASE_SERVICE_ROLE_KEY:latest,STRIPE_SECRET_KEY=STRIPE_SECRET_KEY:latest,STRIPE_WEBHOOK_SECRET=STRIPE_WEBHOOK_SECRET:latest,STRIPE_PRICE_STANDARD=STRIPE_PRICE_STANDARD:latest,STRIPE_PRICE_BUSINESS=STRIPE_PRICE_BUSINESS:latest,STRIPE_PRICE_PRO=STRIPE_PRICE_PRO:latest,STRIPE_PRICE_SETUP=STRIPE_PRICE_SETUP:latest" || \
-          (echo "Deployment failed. Fetching build logs..." && \
-           gcloud builds list --limit=1 --format="value(id)" --filter="status=FAILURE" | head -1 | xargs -I {} gcloud builds log {} && \
-           exit 1)
+            --set-secrets="SUPABASE_SERVICE_ROLE_KEY=SUPABASE_SERVICE_ROLE_KEY:latest,STRIPE_SECRET_KEY=STRIPE_SECRET_KEY:latest,STRIPE_WEBHOOK_SECRET=STRIPE_WEBHOOK_SECRET:latest,STRIPE_PRICE_STANDARD=STRIPE_PRICE_STANDARD:latest,STRIPE_PRICE_BUSINESS=STRIPE_PRICE_BUSINESS:latest,STRIPE_PRICE_PRO=STRIPE_PRICE_PRO:latest,STRIPE_PRICE_SETUP=STRIPE_PRICE_SETUP:latest"
