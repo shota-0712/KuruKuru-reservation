@@ -1,0 +1,60 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: kurukuru-reservation
+  SERVICE_NAME: lincal-landing
+  REGION: asia-northeast1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
+          VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
+          VITE_ANALYTICS_ENDPOINT: ${{ secrets.VITE_ANALYTICS_ENDPOINT }}
+          VITE_ANALYTICS_WEBSITE_ID: ${{ secrets.VITE_ANALYTICS_WEBSITE_ID }}
+        run: pnpm run build
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE_NAME \
+            --source . \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --set-env-vars="NODE_ENV=production" \
+            --set-secrets="SUPABASE_SERVICE_ROLE_KEY=SUPABASE_SERVICE_ROLE_KEY:latest,STRIPE_SECRET_KEY=STRIPE_SECRET_KEY:latest,STRIPE_WEBHOOK_SECRET=STRIPE_WEBHOOK_SECRET:latest,STRIPE_PRICE_STANDARD=STRIPE_PRICE_STANDARD:latest,STRIPE_PRICE_BUSINESS=STRIPE_PRICE_BUSINESS:latest,STRIPE_PRICE_PRO=STRIPE_PRICE_PRO:latest,STRIPE_PRICE_SETUP=STRIPE_PRICE_SETUP:latest"
