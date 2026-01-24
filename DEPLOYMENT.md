@@ -108,6 +108,49 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
   --role="roles/run.admin"
 ```
 
+#### Cloud Build ロール（`--source` オプション使用時）
+
+`--source .` オプションを使用してデプロイする場合、Cloud Buildが自動的にビルドを実行するため、以下の権限が必要です:
+
+```bash
+# Cloud Build Editor ロール（ビルドの開始と管理に必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/cloudbuild.builds.editor"
+
+# Service Account User ロール（Cloud Build サービスアカウントを使用するために必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
+```
+
+#### 必要な権限のまとめ
+
+`--source .` を使用してデプロイする場合、サービスアカウントに以下のすべてのロールが必要です:
+
+```bash
+# すべての権限を一度に付与
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/run.admin"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/cloudbuild.builds.editor"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.admin"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/secretmanager.secretAccessor"
+```
+
 ### 4. デプロイ
 
 mainブランチにpushすると、GitHub Actionsが自動的にビルド・デプロイを実行します:
