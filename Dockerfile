@@ -8,9 +8,10 @@ WORKDIR /app
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 
-# Copy package.json and pnpm-lock.yaml for dependency installation
+# Copy package.json, pnpm-lock.yaml, and patches directory for dependency installation
 COPY package.json ./
 COPY pnpm-lock.yaml* ./
+COPY patches/ ./patches/
 
 # Install production dependencies only
 # esbuild uses --packages=external, so runtime dependencies are needed
@@ -18,6 +19,8 @@ COPY pnpm-lock.yaml* ./
 RUN set -e && \
     echo "Checking for lockfile..." && \
     ls -la pnpm-lock.yaml* 2>/dev/null || echo "No lockfile found" && \
+    echo "Checking for patches..." && \
+    ls -la patches/ 2>/dev/null || echo "No patches directory found" && \
     echo "Installing production dependencies..." && \
     pnpm install --prod --no-frozen-lockfile && \
     echo "Dependencies installed successfully"
