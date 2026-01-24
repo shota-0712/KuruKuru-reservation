@@ -28,16 +28,20 @@ ARG VITE_ANALYTICS_ENDPOINT
 ARG VITE_ANALYTICS_WEBSITE_ID
 
 # Set environment variables for build
-ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
-ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
-ENV VITE_STRIPE_PUBLISHABLE_KEY=$VITE_STRIPE_PUBLISHABLE_KEY
-ENV VITE_APP_URL=$VITE_APP_URL
-ENV VITE_ANALYTICS_ENDPOINT=$VITE_ANALYTICS_ENDPOINT
-ENV VITE_ANALYTICS_WEBSITE_ID=$VITE_ANALYTICS_WEBSITE_ID
+ENV VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+ENV VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+ENV VITE_STRIPE_PUBLISHABLE_KEY=${VITE_STRIPE_PUBLISHABLE_KEY}
+ENV VITE_APP_URL=${VITE_APP_URL}
+ENV VITE_ANALYTICS_ENDPOINT=${VITE_ANALYTICS_ENDPOINT}
+ENV VITE_ANALYTICS_WEBSITE_ID=${VITE_ANALYTICS_WEBSITE_ID}
 
 # Build the application
 # This runs "vite build" (client -> dist/public) and "esbuild" (server -> dist/index.js)
-RUN pnpm run build
+# Use set -e to fail on any error and show detailed output
+RUN set -e && \
+    echo "Building application..." && \
+    echo "VITE_SUPABASE_URL is set: $([ -n "$VITE_SUPABASE_URL" ] && echo 'yes' || echo 'no')" && \
+    pnpm run build || (echo "Build failed. Check the error messages above." && exit 1)
 
 # Run the web service on container startup.
 # Cloud Run sets the PORT environment variable, which the application usually listens directly on.
