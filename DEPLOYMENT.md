@@ -76,14 +76,27 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
 `--source .` オプションを使用してデプロイする場合、Cloud BuildがArtifact Registryにアクセスする必要があります:
 
 ```bash
-# Artifact Registry Writer ロールを付与
+# Artifact Registry Admin ロールを付与（リポジトリ作成と書き込みに必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.admin"
+
+# または、より限定的な権限を付与する場合:
+# Artifact Registry Writer ロール（書き込みのみ）
 gcloud projects add-iam-policy-binding kurukuru-reservation \
   --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
   --role="roles/artifactregistry.writer"
 
+# Artifact Registry リポジトリを事前に作成（推奨）
+gcloud artifacts repositories create cloud-run-source-deploy \
+  --repository-format=docker \
+  --location=asia-northeast1 \
+  --description="Cloud Run source deploy repository"
+
 # Cloud Build Service Account にも権限を付与（必要に応じて）
+PROJECT_NUMBER=$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')
 gcloud projects add-iam-policy-binding kurukuru-reservation \
-  --member="serviceAccount:$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')@cloudbuild.gserviceaccount.com" \
+  --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
   --role="roles/artifactregistry.writer"
 ```
 
