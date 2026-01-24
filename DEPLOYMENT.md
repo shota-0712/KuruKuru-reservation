@@ -124,6 +124,17 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
   --role="roles/iam.serviceAccountUser"
 ```
 
+#### Cloud Storage ロール（`--source` オプション使用時）
+
+`--source .` オプションを使用してデプロイする場合、Cloud BuildがソースコードをアップロードするためにCloud Storageバケットを作成する必要があります:
+
+```bash
+# Storage Admin ロール（バケット作成とオブジェクト管理に必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/storage.admin"
+```
+
 #### 必要な権限のまとめ
 
 `--source .` を使用してデプロイする場合、サービスアカウントに以下のすべてのロールが必要です:
@@ -145,6 +156,10 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
 gcloud projects add-iam-policy-binding kurukuru-reservation \
   --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
   --role="roles/iam.serviceAccountUser"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/storage.admin"
 
 gcloud projects add-iam-policy-binding kurukuru-reservation \
   --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
@@ -191,6 +206,40 @@ git push origin main
 2. 上記の「Artifact Registryへのアクセス権限」セクションのコマンドを実行して権限を付与
 
 3. 権限が反映されるまで数分待ってから再デプロイ
+
+### Cloud Storage の権限エラー
+
+`PERMISSION_DENIED: Permission 'storage.buckets.create' denied` というエラーが出る場合:
+
+1. サービスアカウントに Cloud Storage の権限が付与されているか確認:
+   ```bash
+   gcloud projects get-iam-policy kurukuru-reservation \
+     --flatten="bindings[].members" \
+     --filter="bindings.members:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+     --format="table(bindings.role)"
+   ```
+
+2. Storage Admin ロールを付与:
+   ```bash
+   gcloud projects add-iam-policy-binding kurukuru-reservation \
+     --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+     --role="roles/storage.admin"
+   ```
+
+3. 権限が反映されるまで数分待ってから再デプロイ
+
+### 一般的な権限エラー
+
+`PERMISSION_DENIED` エラーが発生する場合、以下のすべての権限が付与されているか確認してください:
+
+- `roles/run.admin` - Cloud Run デプロイ
+- `roles/cloudbuild.builds.editor` - Cloud Build 実行
+- `roles/artifactregistry.admin` - Artifact Registry アクセス
+- `roles/storage.admin` - Cloud Storage バケット作成
+- `roles/iam.serviceAccountUser` - サービスアカウント使用
+- `roles/secretmanager.secretAccessor` - Secret Manager アクセス
+
+上記の「必要な権限のまとめ」セクションのコマンドをすべて実行してください。
 
 ## 環境変数の確認方法
 
