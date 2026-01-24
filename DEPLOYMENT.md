@@ -93,11 +93,24 @@ gcloud artifacts repositories create cloud-run-source-deploy \
   --location=asia-northeast1 \
   --description="Cloud Run source deploy repository"
 
-# Cloud Build Service Account にも権限を付与（必要に応じて）
+# Cloud Build Service Account にも権限を付与（必須）
 PROJECT_NUMBER=$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')
+CLOUD_BUILD_SA="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+
+# Artifact Registry Writer
 gcloud projects add-iam-policy-binding kurukuru-reservation \
-  --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
   --role="roles/artifactregistry.writer"
+
+# Cloud Run Admin（デプロイに必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
+  --role="roles/run.admin"
+
+# Service Account User（他のサービスアカウントを使用するため）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
+  --role="roles/iam.serviceAccountUser"
 ```
 
 #### Cloud Run Admin ロール（デプロイに必要）
@@ -122,6 +135,11 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
 gcloud projects add-iam-policy-binding kurukuru-reservation \
   --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
   --role="roles/iam.serviceAccountUser"
+
+# Service Usage Consumer ロール（API サービスの使用に必要）
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/serviceusage.serviceUsageConsumer"
 ```
 
 #### Cloud Storage ロール（`--source` オプション使用時）
@@ -163,8 +181,27 @@ gcloud projects add-iam-policy-binding kurukuru-reservation \
 
 gcloud projects add-iam-policy-binding kurukuru-reservation \
   --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+  --role="roles/serviceusage.serviceUsageConsumer"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
   --role="roles/secretmanager.secretAccessor"
-```
+
+# Cloud Build サービスアカウントにも権限を付与（必須）
+PROJECT_NUMBER=$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')
+CLOUD_BUILD_SA="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
+  --role="roles/artifactregistry.writer"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
+  --role="roles/run.admin"
+
+gcloud projects add-iam-policy-binding kurukuru-reservation \
+  --member="serviceAccount:${CLOUD_BUILD_SA}" \
+  --role="roles/iam.serviceAccountUser"
 
 ### 4. デプロイ
 
@@ -228,16 +265,60 @@ git push origin main
 
 3. 権限が反映されるまで数分待ってから再デプロイ
 
+### Cloud Build サービスアカウントの権限エラー
+
+`Build failed because the default service account is missing required IAM permissions` というエラーが出る場合:
+
+1. プロジェクト番号を取得:
+   ```bash
+   PROJECT_NUMBER=$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')
+   echo "Cloud Build SA: ${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+   ```
+
+2. Cloud Build サービスアカウントに必要な権限を付与:
+   ```bash
+   PROJECT_NUMBER=$(gcloud projects describe kurukuru-reservation --format='value(projectNumber)')
+   CLOUD_BUILD_SA="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+   
+   gcloud projects add-iam-policy-binding kurukuru-reservation \
+     --member="serviceAccount:${CLOUD_BUILD_SA}" \
+     --role="roles/artifactregistry.writer"
+   
+   gcloud projects add-iam-policy-binding kurukuru-reservation \
+     --member="serviceAccount:${CLOUD_BUILD_SA}" \
+     --role="roles/run.admin"
+   
+   gcloud projects add-iam-policy-binding kurukuru-reservation \
+     --member="serviceAccount:${CLOUD_BUILD_SA}" \
+     --role="roles/iam.serviceAccountUser"
+   ```
+
+3. GitHub Actions サービスアカウントに Service Usage Consumer ロールを付与:
+   ```bash
+   gcloud projects add-iam-policy-binding kurukuru-reservation \
+     --member="serviceAccount:github-actions@kurukuru-reservation.iam.gserviceaccount.com" \
+     --role="roles/serviceusage.serviceUsageConsumer"
+   ```
+
+4. 権限が反映されるまで数分待ってから再デプロイ
+
 ### 一般的な権限エラー
 
 `PERMISSION_DENIED` エラーが発生する場合、以下のすべての権限が付与されているか確認してください:
 
+#### GitHub Actions サービスアカウントに必要なロール:
 - `roles/run.admin` - Cloud Run デプロイ
 - `roles/cloudbuild.builds.editor` - Cloud Build 実行
 - `roles/artifactregistry.admin` - Artifact Registry アクセス
 - `roles/storage.admin` - Cloud Storage バケット作成
 - `roles/iam.serviceAccountUser` - サービスアカウント使用
+- `roles/serviceusage.serviceUsageConsumer` - API サービスの使用
 - `roles/secretmanager.secretAccessor` - Secret Manager アクセス
+
+#### Cloud Build サービスアカウントに必要なロール:
+- `roles/artifactregistry.writer` - Artifact Registry への書き込み
+- `roles/run.admin` - Cloud Run へのデプロイ
+- `roles/iam.serviceAccountUser` - サービスアカウント使用
 
 上記の「必要な権限のまとめ」セクションのコマンドをすべて実行してください。
 
