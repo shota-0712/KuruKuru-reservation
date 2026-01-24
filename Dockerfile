@@ -9,11 +9,18 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 
 # Copy package.json and pnpm-lock.yaml for dependency installation
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json ./
+COPY pnpm-lock.yaml* ./
 
 # Install production dependencies only
 # esbuild uses --packages=external, so runtime dependencies are needed
-RUN pnpm install --prod --frozen-lockfile || pnpm install --prod --no-frozen-lockfile
+# Always use --no-frozen-lockfile since we're building from source in CI
+RUN set -e && \
+    echo "Checking for lockfile..." && \
+    ls -la pnpm-lock.yaml* 2>/dev/null || echo "No lockfile found" && \
+    echo "Installing production dependencies..." && \
+    pnpm install --prod --no-frozen-lockfile && \
+    echo "Dependencies installed successfully"
 
 # Copy the pre-built application (built in GitHub Actions)
 # dist/ contains both the client (dist/public) and server (dist/index.js)
