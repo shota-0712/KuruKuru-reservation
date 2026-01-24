@@ -24,10 +24,6 @@ import {
   Menu,
   X,
   PhoneCall,
-  FileText,
-  Globe,
-  Workflow,
-  Zap,
   ArrowDown
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -50,14 +46,24 @@ const staggerContainer = {
 function AnimatedSection({ children, className = "", id }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+  }, []);
+
+  // Skip animations on mobile or if user prefers reduced motion
+  const shouldAnimate = !prefersReducedMotion;
 
   return (
     <motion.section
       ref={ref}
       id={id}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={staggerContainer}
+      initial={shouldAnimate ? "hidden" : "visible"}
+      animate={isInView || !shouldAnimate ? "visible" : "hidden"}
+      variants={shouldAnimate ? staggerContainer : undefined}
+      transition={shouldAnimate ? undefined : { duration: 0 }}
       className={className}
     >
       {children}
@@ -91,6 +97,8 @@ function Header() {
               src="/logo_toumei.png"
               alt="LinCal"
               className="h-10 sm:h-12 md:h-16 w-auto"
+              width="180"
+              height="64"
             />
           </a>
 
@@ -159,6 +167,8 @@ function HeroSection() {
           src="/images/clinic-salon.webp"
           alt="サロン店内イメージ"
           className="w-full h-full object-cover object-[75%] sm:object-center opacity-80"
+          width="1920"
+          height="1080"
         />
         <div className="absolute inset-0 grid-bg opacity-20 z-0" />
 
@@ -191,15 +201,18 @@ function HeroSection() {
                 <img
                   src="/logo_moji.png"
                   alt="LinCal"
-                  className="h-10 sm:h-16 lg:h-20 w-auto mb-1 sm:mb-2"
+                  className="h-10 sm:h-16 lg:h-20 w-auto mb-1 sm:mb-2 drop-shadow-lg"
+                  width="200"
+                  height="80"
+                  style={{ filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15))' }}
                 />
-                <span className="block animated-gradient-text drop-shadow-sm text-[22px] sm:text-5xl lg:text-6xl font-extrabold whitespace-nowrap">LINE予約システム</span>
+                <h1 className="block animated-gradient-text text-[22px] sm:text-5xl lg:text-6xl font-extrabold whitespace-nowrap" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.8)' }}>LINE予約システム</h1>
               </motion.div>
 
               {/* Subheadline */}
-              <motion.p variants={fadeInUp} className="text-xs sm:text-xl lg:text-2xl text-muted-foreground mb-4 sm:mb-10 leading-relaxed font-medium line-clamp-2 sm:line-clamp-none">
-                サロン・ジム・治療院など<br className="sm:hidden" />
-                <span className="text-foreground font-bold">月額1,980円</span>からのDX。
+              <motion.p variants={fadeInUp} className="text-xs sm:text-xl lg:text-2xl text-muted-foreground mb-4 sm:mb-10 leading-relaxed font-medium line-clamp-2 sm:line-clamp-none" style={{ textShadow: '0 1px 3px rgba(255, 255, 255, 0.9), 0 1px 6px rgba(255, 255, 255, 0.7)' }}>
+                サロン・美容室・治療院・ジムのDX。<br className="sm:hidden" />
+                <span className="text-foreground font-bold">月額1,980円</span>から始める予約管理。
               </motion.p>
 
               {/* CTA Buttons - Simplified for mobile side-by-side */}
@@ -231,9 +244,11 @@ function HeroSection() {
                 <div className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-gray-900 shadow-xl sm:shadow-2xl overflow-hidden ring-1 ring-white/20">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
                   <img
-                    src="/images/screenshots/S__28786696_0.jpg"
+                    src="/images/screenshots/S__30318638_0.jpg"
                     alt="LinCal LINE予約システムのメニュー選択画面"
                     className="w-full h-auto bg-white"
+                    width="390"
+                    height="844"
                   />
 
                   {/* Reflection gradient */}
@@ -455,25 +470,30 @@ function ScreenshotsSection() {
   const [activeTab, setActiveTab] = useState<'customer' | 'admin'>('customer');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Customer screens (5 images) - Using images with LINE header
+  // Customer screens (6 images) - Using images with LINE header
   const customerScreens = [
-    { src: "/images/screenshots/S__28786696_0.jpg", title: "メニュー選択", description: "写真付きメニューから直感的に選択" },
-    { src: "/images/screenshots/S__28786697_0.jpg", title: "日時選択", description: "空き状況を確認して予約" },
-    { src: "/images/screenshots/S__28786698_0.jpg", title: "予約確認", description: "予約内容を確認して完了" },
-    { src: "/images/screenshots/S__28786699_0.jpg", title: "マイページ", description: "予約履歴の確認・変更" },
-    { src: "/images/screenshots/S__28786700_0.jpg", title: "予約詳細&キャンセル", description: "予約の詳細を確認" },
+    { src: "/images/screenshots/S__30318638_0.jpg", title: "メニュー選択", description: "写真付きメニューから直感的に選択" },
+    { src: "/images/screenshots/S__30318642_0.jpg", title: "オプション選択", description: "追加オプションを選択" },
+    { src: "/images/screenshots/S__30318641_0.jpg", title: "日時選択", description: "施術者を指名して日時を選択" },
+    { src: "/images/screenshots/S__30318640_0.jpg", title: "予約確認", description: "予約内容を確認して完了" },
+    { src: "/images/screenshots/S__30318639_0.jpg", title: "マイページ", description: "予約履歴の確認" },
+    { src: "/images/screenshots/S__30318645_0.jpg", title: "予約詳細&キャンセル", description: "予約の詳細確認・キャンセル" },
   ];
 
-  // Admin screens (8 images) - Using images with LINE header
+  // Admin screens (12 images) - Using images with LINE header
   const adminScreens = [
-    { src: "/images/screenshots/S__28786701_0.jpg", title: "予約一覧", description: "予約の一覧表示" },
-    { src: "/images/screenshots/S__28786702_0.jpg", title: "メニュー管理", description: "メニューの追加・編集" },
-    { src: "/images/screenshots/S__28786703_0.jpg", title: "メニュー編集", description: "価格・時間の設定" },
-    { src: "/images/screenshots/S__28786704_0.jpg", title: "施術者管理", description: "スタッフの追加・編集" },
-    { src: "/images/screenshots/S__28786705_0.jpg", title: "施術者編集", description: "担当者の詳細設定" },
-    { src: "/images/screenshots/S__28786707_0.jpg", title: "店舗情報設定", description: "店舗の基本情報を設定" },
-    { src: "/images/screenshots/S__28786708_0.jpg", title: "営業時間設定", description: "営業時間・休日の設定" },
-    { src: "/images/screenshots/S__28786709_0.jpg", title: "予約完了時の通知", description: "LINEで予約完了通知する文面の設定" },
+    { src: "/images/screenshots/S__30318644_0.jpg", title: "予約一覧", description: "予約の一覧表示" },
+    { src: "/images/screenshots/S__30318643_0.jpg", title: "メニュー管理", description: "メニューの一覧・並び替え" },
+    { src: "/images/screenshots/S__30318650_0.jpg", title: "メニュー追加", description: "新しいメニューを追加" },
+    { src: "/images/screenshots/S__30318646_0.jpg", title: "メニュー編集", description: "価格・時間の設定" },
+    { src: "/images/screenshots/S__30318649_0.jpg", title: "オプション管理", description: "オプションの一覧" },
+    { src: "/images/screenshots/S__30318653_0.jpg", title: "オプション追加", description: "新しいオプションを追加" },
+    { src: "/images/screenshots/S__30318647_0.jpg", title: "オプション編集", description: "オプションの詳細設定" },
+    { src: "/images/screenshots/S__30318652_0.jpg", title: "施術者管理", description: "スタッフの一覧" },
+    { src: "/images/screenshots/S__30318656_0.jpg", title: "施術者追加", description: "新しいスタッフを追加" },
+    { src: "/images/screenshots/S__30318651_0.jpg", title: "施術者編集", description: "担当者の詳細設定" },
+    { src: "/images/screenshots/S__30318655_0.jpg", title: "店舗・営業設定", description: "店舗情報・営業時間の設定" },
+    { src: "/images/screenshots/S__30318654_0.jpg", title: "予約システム設定", description: "臨時休業・予約完了時の表示" },
   ];
 
   const currentScreens = activeTab === 'customer' ? customerScreens : adminScreens;
@@ -620,6 +640,8 @@ function HowItWorksSection() {
                 src="/images/happy-owner.webp"
                 alt="スマホで予約管理をするサロンオーナー"
                 className="rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl w-full"
+                width="800"
+                height="600"
               />
             </div>
           </motion.div>
@@ -809,7 +831,7 @@ function PricingSection() {
         {/* Helper Note */}
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
-            ※ すべて税込み表示です。初期費用は全プラン0円となります。
+            ※ すべて税込み表示です。初期費用19,800円は全プラン共通です。
           </p>
         </div>
       </div>
@@ -1090,6 +1112,8 @@ function Footer() {
               src="/images/LinCal_logo.webp"
               alt="LinCal"
               className="h-10 sm:h-12 w-auto brightness-0 invert"
+              width="150"
+              height="48"
             />
           </div>
 
@@ -1099,10 +1123,33 @@ function Footer() {
             <a href="#pricing" className="hover:text-white transition-colors">料金</a>
             <a href="#testimonials" className="hover:text-white transition-colors">導入事例</a>
             <a href="#faq" className="hover:text-white transition-colors">よくある質問</a>
+            <a href="https://lin.ee/tH2mCjG" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">お問い合わせ</a>
           </nav>
         </div>
 
         <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8">
+          {/* Security & Trust Indicators */}
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <div className="flex items-center gap-2 text-white/70 text-xs sm:text-sm">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>SSL暗号化通信</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/70 text-xs sm:text-sm">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span>個人情報保護</span>
+            </div>
+            <div className="flex items-center gap-2 text-white/70 text-xs sm:text-sm">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>安心サポート</span>
+            </div>
+          </div>
+
           <div className="text-[10px] sm:text-xs text-white/50 space-y-1 sm:space-y-2 px-4 sm:px-0">
             <p>※本システムはLINEヤフー株式会社およびGoogle LLCの公認ツールではありません。</p>
             <p>※Googleカレンダー等の仕様変更により、一時的に機能が制限される場合があります。</p>
@@ -1114,6 +1161,39 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+// Floating CTA Button for Mobile
+function FloatingCTA() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show button after scrolling 300px
+      setIsVisible(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden"
+    >
+      <Button
+        className="glow-btn text-sm px-6 py-3 rounded-full font-bold text-white shadow-2xl cursor-pointer relative z-10"
+        onClick={() => window.open("https://lin.ee/tH2mCjG", "_blank")}
+      >
+        無料で相談する
+        <ChevronRight className="w-4 h-4 ml-1" />
+      </Button>
+    </motion.div>
   );
 }
 
@@ -1135,6 +1215,7 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }

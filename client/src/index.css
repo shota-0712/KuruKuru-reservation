@@ -90,13 +90,13 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.02 60);
 
-  /* Secondary - Warm Gray */
+  /* Secondary - Warm Gray - Improved contrast */
   --secondary: oklch(0.96 0.005 90);
-  --secondary-foreground: oklch(0.40 0.02 60);
+  --secondary-foreground: oklch(0.35 0.02 60);
 
-  /* Muted */
+  /* Muted - Improved contrast for accessibility (WCAG AA) */
   --muted: oklch(0.95 0.005 90);
-  --muted-foreground: oklch(0.50 0.02 60);
+  --muted-foreground: oklch(0.45 0.02 60);
 
   /* Accent */
   --accent: oklch(0.92 0.02 155);
