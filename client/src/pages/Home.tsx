@@ -156,6 +156,88 @@ function Header() {
   );
 }
 
+// Phone Mockup with 3D Hover Effect
+function PhoneMockupWithHover() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className="relative transform transition-transform duration-700 ease-out scale-100 sm:scale-100 origin-center"
+      style={{
+        transform: isHovered ? 'rotateY(0deg)' : 'rotateY(-10deg)'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Glow behind phone */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-2xl sm:blur-3xl opacity-60 animate-pulse" />
+
+      {/* Phone Frame */}
+      <div className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-gray-900 shadow-xl sm:shadow-2xl overflow-hidden ring-1 ring-white/20">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
+        <img
+          src="/images/screenshots/S__30318638_0.jpg"
+          alt="LinCal LINE予約システムのメニュー選択画面"
+          className="w-full h-auto bg-white"
+          width="390"
+          height="844"
+        />
+
+        {/* Reflection gradient */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10 mix-blend-overlay" />
+      </div>
+
+      {/* Floating Notification - Left */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+        className="absolute -left-2 sm:-left-12 bottom-20 sm:bottom-40 z-30"
+      >
+        <div className="transform scale-75 sm:scale-100 origin-bottom-left">
+          <Card className="glass-card border-0 shadow-lg !bg-white/95">
+            <CardContent className="p-2 sm:p-3">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">予約が入りました</p>
+                  <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">現在 14:00〜 カット</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </motion.div>
+
+      {/* Floating Notification - Right */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2 }}
+        className="absolute -right-2 sm:-right-8 top-12 sm:top-20 z-30"
+      >
+        <div className="transform scale-75 sm:scale-100 origin-top-right">
+          <Card className="glass-card border-0 shadow-lg !bg-white/95">
+            <CardContent className="p-2 sm:p-3">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">カレンダー連携済</p>
+                  <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">自動で同期しました</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 // Hero Section - High Impact Redesign with Split Layout
 function HeroSection() {
   return (
@@ -234,75 +316,10 @@ function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative perspective-1000"
+              className="relative"
+              style={{ perspective: '1000px' }}
             >
-              <div className="relative transform rotate-y-[-10deg] hover:rotate-y-0 transition-transform duration-700 ease-out scale-100 sm:scale-100 origin-center">
-                {/* Glow behind phone */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-2xl sm:blur-3xl opacity-60 animate-pulse" />
-
-                {/* Phone Frame */}
-                <div className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2.5rem] border-[4px] sm:border-[8px] border-gray-900 shadow-xl sm:shadow-2xl overflow-hidden ring-1 ring-white/20">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-32 h-3 sm:h-6 bg-gray-900 rounded-b-md sm:rounded-b-xl z-20" />
-                  <img
-                    src="/images/screenshots/S__30318638_0.jpg"
-                    alt="LinCal LINE予約システムのメニュー選択画面"
-                    className="w-full h-auto bg-white"
-                    width="390"
-                    height="844"
-                  />
-
-                  {/* Reflection gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10 mix-blend-overlay" />
-                </div>
-
-                {/* Floating Notification - Left */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                  className="absolute -left-2 sm:-left-12 bottom-20 sm:bottom-40 z-30"
-                >
-                  <div className="transform scale-75 sm:scale-100 origin-bottom-left">
-                    <Card className="glass-card border-0 shadow-lg !bg-white/95">
-                      <CardContent className="p-2 sm:p-3">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 flex items-center justify-center">
-                            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-                          </div>
-                          <div>
-                            <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">予約が入りました</p>
-                            <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">現在 14:00〜 カット</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </motion.div>
-
-                {/* Floating Notification - Right */}
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="absolute -right-2 sm:-right-8 top-12 sm:top-20 z-30"
-                >
-                  <div className="transform scale-75 sm:scale-100 origin-top-right">
-                    <Card className="glass-card border-0 shadow-lg !bg-white/95">
-                      <CardContent className="p-2 sm:p-3">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-                          </div>
-                          <div>
-                            <p className="text-[10px] sm:text-xs font-bold whitespace-nowrap">カレンダー連携済</p>
-                            <p className="text-[8px] sm:text-[10px] text-muted-foreground whitespace-nowrap">自動で同期しました</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </motion.div>
-              </div>
+              <PhoneMockupWithHover />
             </motion.div>
           </div>
         </div>
