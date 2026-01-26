@@ -17,6 +17,7 @@ import {
   Mail,
   ArrowLeft
 } from 'lucide-react';
+import { ProfileEditDialog } from '@/components/ProfileEditDialog';
 
 const PLANS = [
   {
@@ -193,7 +194,14 @@ export default function MyPage() {
         <Card className="mb-8 border-0 shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              <span>アカウント情報</span>
+              <div className="flex items-center gap-3">
+                <span>アカウント情報</span>
+                <ProfileEditDialog
+                  currentFullName={profile?.full_name || ''}
+                  currentCompanyName={profile?.company_name || ''}
+                  onSuccess={refreshProfile}
+                />
+              </div>
               {getStatusBadge()}
             </CardTitle>
           </CardHeader>
@@ -265,9 +273,8 @@ export default function MyPage() {
               {PLANS.map((plan) => (
                 <Card
                   key={plan.id}
-                  className={`border-0 shadow-lg transition-all hover:shadow-xl ${
-                    currentPlan === plan.id ? 'ring-2 ring-primary' : ''
-                  }`}
+                  className={`border-0 shadow-lg transition-all hover:shadow-xl ${currentPlan === plan.id ? 'ring-2 ring-primary' : ''
+                    }`}
                 >
                   <CardHeader>
                     <CardTitle>{plan.name}</CardTitle>
