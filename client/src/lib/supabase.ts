@@ -3,16 +3,20 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
+export const isSupabaseConfigured = !!supabaseUrl && !!supabaseAnonKey;
+
+if (!isSupabaseConfigured) {
   console.error(
     "CRITICAL ERROR: Supabase environment variables are missing.\n" +
     "Please check your .env file locally or GitHub Secrets in production.\n" +
     "Required: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY"
   );
-  throw new Error('Supabase configuration missing. See console for details.');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder'
+);
 
 // 型定義
 export type Profile = {
