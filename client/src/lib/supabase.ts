@@ -6,7 +6,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 export const isSupabaseConfigured = !!supabaseUrl && !!supabaseAnonKey;
 
 console.log('[Supabase Config] URL:', supabaseUrl);
-console.log('[Supabase Config] Key present:', !!supabaseAnonKey, 'Length:', supabaseAnonKey?.length);
+console.log('[Supabase Config] Key prefix:', supabaseAnonKey?.substring(0, 15) + '...');
+console.log('[Supabase Config] Key length:', supabaseAnonKey?.length);
 
 if (!isSupabaseConfigured) {
   console.error(
