@@ -5,6 +5,9 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const isSupabaseConfigured = !!supabaseUrl && !!supabaseAnonKey;
 
+console.log('[Supabase Config] URL:', supabaseUrl);
+console.log('[Supabase Config] Key present:', !!supabaseAnonKey, 'Length:', supabaseAnonKey?.length);
+
 if (!isSupabaseConfigured) {
   console.error(
     "CRITICAL ERROR: Supabase environment variables are missing.\n" +
