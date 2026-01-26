@@ -162,12 +162,7 @@ function PhoneMockupWithHover() {
 
   return (
     <div
-      className="relative transform transition-transform duration-700 ease-out scale-100 sm:scale-100 origin-center"
-      style={{
-        transform: isHovered ? 'rotateY(0deg)' : 'rotateY(-10deg)'
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative transform scale-100 sm:scale-100 origin-center"
     >
       {/* Glow behind phone */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-2xl sm:blur-3xl opacity-60 animate-pulse" />
