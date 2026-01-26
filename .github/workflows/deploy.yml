@@ -31,13 +31,12 @@ jobs:
 
       - name: Build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
-          VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
-          VITE_ANALYTICS_ENDPOINT: ${{ secrets.VITE_ANALYTICS_ENDPOINT }}
-          VITE_ANALYTICS_WEBSITE_ID: ${{ secrets.VITE_ANALYTICS_WEBSITE_ID }}
+          VITE_SUPABASE_URL: "https://npuhvdvrjznvvufejthe.supabase.co"
+          VITE_SUPABASE_ANON_KEY: "sb_publishable_5kfwFIVewj0ABs6lX0HIkQ_vRrQZjz_"
+          VITE_STRIPE_PUBLISHABLE_KEY: "pk_live_51SJolEAm4PgMwLYPySnmo4LYnxbZ6F9eVmOpR1ibT2r3MIbprMtBfV8JjPt8Lr3EUCbPml74Zx36RRLNYrBzfl2z00C4vihCW7"
+          VITE_APP_URL: "https://lincal-reserve.com"
         run: pnpm run build
+
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
