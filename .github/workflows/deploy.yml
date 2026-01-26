@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_ID: kurukuru-reservation
-  SERVICE_NAME: lincal-landing
+  SERVICE_NAME: kurukuru-landing
   REGION: asia-northeast1
 
 jobs:
