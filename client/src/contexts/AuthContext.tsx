@@ -45,32 +45,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    console.log('[Auth] Initializing...');
+
+    // Safety timeout: stop loading after 5 seconds even if something hangs
+    const safetyTimeout = setTimeout(() => {
+      console.warn('[Auth] Safety timeout reached - forcing loading=false');
+      setLoading(false);
+    }, 5000);
+
     // 初回セッション取得
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('[Auth] getSession result:', session ? 'Session found' : 'No session');
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchProfile(session.user.id).then(setProfile);
+        console.log('[Auth] Fetching profile for user:', session.user.id);
+        fetchProfile(session.user.id).then((profile) => {
+          console.log('[Auth] Profile fetched:', profile ? 'Success' : 'Null');
+          setProfile(profile);
+        });
       }
       setLoading(false);
+      clearTimeout(safetyTimeout);
+    }).catch(err => {
+      console.error('[Auth] getSession error:', err);
+      setLoading(false);
+      clearTimeout(safetyTimeout);
     });
 
     // 認証状態の変更を監視
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      async (event, session) => {
+        console.log('[Auth] Auth state changed:', event);
         setSession(session);
         setUser(session?.user ?? null);
+
         if (session?.user) {
+          console.log('[Auth] Fetching profile (on change)...');
           const profileData = await fetchProfile(session.user.id);
+          console.log('[Auth] Profile fetched (on change):', profileData ? 'Success' : 'Null');
           setProfile(profileData);
         } else {
           setProfile(null);
         }
         setLoading(false);
+        clearTimeout(safetyTimeout);
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(safetyTimeout);
+    };
   }, []);
 
   // 新規登録
