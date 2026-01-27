@@ -23,17 +23,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // プロフィール取得
   const fetchProfile = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
+    try {
+      const fetchPromise = supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-    if (error) {
-      console.error('Error fetching profile:', error);
+      const timeoutPromise = new Promise<{ data: null; error: { message: string } } | { data: Profile; error: null }>((resolve) =>
+        setTimeout(() => resolve({ data: null, error: { message: 'Profile fetch timed out' } }), 5000)
+      );
+
+      // @ts-ignore - Promise race types are tricky with Supabase response
+      const { data, error } = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (error) {
+        console.error('Error fetching profile:', error);
+        return null;
+      }
+      return data as Profile;
+    } catch (err) {
+      console.error('Unexpected error in fetchProfile:', err);
       return null;
     }
-    return data as Profile;
   };
 
   // プロフィールリフレッシュ
