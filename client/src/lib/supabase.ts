@@ -17,9 +17,44 @@ if (!isSupabaseConfigured) {
   );
 }
 
+const customFetch = async (url: string, options: any) => {
+  const timeout = 10000; // 10秒
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  console.log(`[Supabase Fetch] Request: ${url}`);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    clearTimeout(id);
+    console.log(`[Supabase Fetch] Response: ${response.status} ${response.statusText}`);
+    return response;
+  } catch (error: any) {
+    clearTimeout(id);
+    console.error(`[Supabase Fetch] Error:`, error);
+    if (error.name === 'AbortError') {
+      console.error('[Supabase Fetch] Request timed out after 10s');
+    }
+    throw error;
+  }
+};
+
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder'
+  supabaseAnonKey || 'placeholder',
+  {
+    global: {
+      fetch: customFetch as any,
+    },
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    }
+  }
 );
 
 // 型定義
