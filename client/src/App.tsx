@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import MyPage from "./pages/MyPage";
+import Legal from "./pages/Legal";
 
 
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -18,6 +19,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/auth"} component={Auth} />
       <Route path={"/mypage"} component={MyPage} />
+      <Route path={"/legal"} component={Legal} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

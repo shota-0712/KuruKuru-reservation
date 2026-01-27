@@ -1216,6 +1216,7 @@ function Footer() {
             <a href="#faq" className="hover:text-white transition-colors">よくある質問</a>
             <a href="https://lin.ee/tH2mCjG" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">お問い合わせ</a>
             <a href="/mypage" className="hover:text-white transition-colors">マイページ</a>
+            <a href="/legal" className="hover:text-white transition-colors">特定商取引法に基づく表記</a>
           </nav>
         </div>
 
